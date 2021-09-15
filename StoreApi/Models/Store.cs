@@ -9,7 +9,7 @@ namespace StoreApi.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("StoreName")]
+        [BsonElement("Name")]
         public string Name { get; set; }
     }
 }
