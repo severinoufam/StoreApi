@@ -12,6 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using StoreApi.Models;
+using Microsoft.Extensions.Options;
+using StoreApi.Services;
+
 namespace StoreApi
 {
     public class Startup
@@ -26,6 +30,12 @@ namespace StoreApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // requires using Microsoft.Extensions.Options
+            services.Configure<VirtualstoreDatabaseSettings>(Configuration.GetSection(nameof(VirtualstoreDatabaseSettings)));
+
+            services.AddSingleton<IDatabaseSettings>(sp =>sp.GetRequiredService<IOptions<VirtualstoreDatabaseSettings>>().Value);
+
+            services.AddSingleton<StoresService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
