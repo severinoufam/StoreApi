@@ -36,6 +36,7 @@ namespace StoreApi
             services.AddSingleton<IDatabaseSettings>(sp =>sp.GetRequiredService<IOptions<VirtualstoreDatabaseSettings>>().Value);
 
             services.AddSingleton<StoresService>();
+            services.AddSingleton<ProductsService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
